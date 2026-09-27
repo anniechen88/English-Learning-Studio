@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annie Chen的英文學習坊 - Wool Felt English Studio</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Sans+TC:wght@400;600;700;900&family=Gentium+Plus:ital,wght@0,400;0,700;1,400&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* 羊毛氈質地與縫線效果 */
+    :root {
+      --stitch-color: rgba(145, 95, 109, 0.45);
+      --stitch-blue: rgba(82, 114, 168, 0.45);
+      --stitch-purple: rgba(120, 84, 160, 0.45);
+    }
+
+    body {
+      background-color: #fbf6ef;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 235, 240, 0.7) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(235, 240, 255, 0.7) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(245, 238, 255, 0.6) 0%, transparent 60%),
+        radial-gradient(rgba(180, 160, 140, 0.12) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 14px 14px;
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+    }
+
+    /* 羊毛氈蓬鬆立體卡片 (Wool Felt Card) */
+    .felt-card {
+      background-color: #ffffff;
+      border: 3px dashed var(--stitch-color);
+      border-radius: 28px;
+      box-shadow: 
+        0 10px 0 #ecdacf,
+        0 14px 22px rgba(184, 147, 133, 0.18),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9);
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+    .felt-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 0 #ecdacf,
+        0 18px 26px rgba(184, 147, 133, 0.22),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9);
+    }
+
+    .felt-card-blue {
+      border-color: var(--stitch-blue);
+      box-shadow: 0 10px 0 #d7e4f5, 0 14px 22px rgba(120, 148, 185, 0.18);
+    }
+    .felt-card-blue:hover {
+      box-shadow: 0 12px 0 #d7e4f5, 0 18px 26px rgba(120, 148, 185, 0.22);
+    }
+
+    .felt-card-purple {
+      border-color: var(--stitch-purple);
+      box-shadow: 0 10px 0 #eeddf8, 0 14px 22px rgba(154, 131, 182, 0.18);
+    }
+    .felt-card-purple:hover {
+      box-shadow: 0 12px 0 #eeddf8, 0 18px 26px rgba(154, 131, 182, 0.22);
+    }
+
+    /* 羊毛氈布標標籤 (Felt Cloth Badge) */
+    .felt-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);
+      position: relative;
+    }
+    .felt-badge-pink {
+      background: #ffd6e0;
+      color: #9f3a55;
+      border: 2px dashed #f28da5;
+    }
+    .felt-badge-purple {
+      background: #eddcf8;
+      color: #6a3494;
+      border: 2px dashed #b893db;
+    }
+    .felt-badge-blue {
+      background: #d9e9fb;
+      color: #27568f;
+      border: 2px dashed #8bb7e8;
+    }
+
+    /* 水晶玻璃感按鈕 (Crystal Glass Button) */
+    .crystal-btn {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.3) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 
+        0 4px 12px rgba(160, 130, 160, 0.12),
+        inset 0 2px 2px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.04);
+      border-radius: 14px;
+      color: #4b4255;
+      font-weight: 700;
+      transition: all 0.18s cubic-bezier(0.2, 0.8, 0.4, 1);
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .crystal-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 35%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.7), transparent);
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .crystal-btn:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.45) 100%);
+      transform: translateY(-1.5px);
+      box-shadow: 
+        0 7px 18px rgba(160, 130, 160, 0.2),
+        inset 0 2px 3px rgba(255, 255, 255, 1);
+      color: #632d72;
+    }
+    .crystal-btn:active {
+      transform: translateY(1px);
+      box-shadow: 
+        0 2px 6px rgba(160, 130, 160, 0.15),
+        inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 水晶玻璃按鈕 - 播放中微光特效 */
+    .crystal-btn.playing {
+      background: linear-gradient(135deg, rgba(243, 230, 255, 0.9) 0%, rgba(205, 230, 255, 0.7) 100%);
+      border-color: rgba(168, 85, 247, 0.7);
+      color: #7e22ce;
+      box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
+      animation: pulse-glow 1.5s infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 12px rgba(168, 85, 247, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.6); }
+    }
+
+    /* 精緻金屬調速按鈕 (Metallic Buttons for Speed adjustment) */
+    .metal-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: linear-gradient(145deg, #ffffff, #cfd7df);
+      border: 1px solid #b2becb;
+      box-shadow: 
+        0 2px 4px rgba(70, 80, 95, 0.22),
+        inset 0 1px 1px rgba(255, 255, 255, 0.95),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.12);
+      color: #3f4d5a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.1s ease;
+    }
+    .metal-btn:hover {
+      background: linear-gradient(145deg, #ffffff, #dce4eb);
+      color: #1a2228;
+      transform: translateY(-0.5px);
+      box-shadow: 0 3px 6px rgba(70, 80, 95, 0.28), inset 0 1px 1px #fff;
+    }
+    .metal-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 2px rgba(70, 80, 95, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.2);
+      background: #c3ccd6;
+    }
+
+    /* 漂浮裝飾物 (Floating Charms: Flowers, Coins, Clovers) */
+    .bg-charms-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .charm {
+      position: absolute;
+      top: -60px;
+      opacity: 0.8;
+      filter: drop-shadow(0 4px 6px rgba(180, 140, 140, 0.2));
+      animation-name: fallDrift;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      will-change: transform;
+    }
+    @keyframes fallDrift {
+      0% {
+        transform: translateY(-80px) translateX(0) rotate(0deg) scale(0.9);
+      }
+      25% {
+        transform: translateY(28vh) translateX(30px) rotate(90deg) scale(1);
+      }
+      50% {
+        transform: translateY(55vh) translateX(-25px) rotate(190deg) scale(1.05);
+      }
+      75% {
+        transform: translateY(82vh) translateX(25px) rotate(280deg) scale(0.95);
+      }
+      100% {
+        transform: translateY(115vh) translateX(-15px) rotate(360deg) scale(0.9);
+      }
+    }
+
+    /* 回到頂端浮動按鈕動畫 */
+    .scroll-top-btn {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .scroll-top-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="relative min-h-screen text-slate-800 pb-28 overflow-x-hidden selection:bg-pink-200 selection:text-pink-900">
+
+  <!-- 由上往下徐徐飄落、旋轉擺動的浪漫背景裝飾物 -->
+  <div class="bg-charms-container" aria-hidden="true">
+    <!-- 幸運草 1 -->
+    <svg class="charm w-10 h-10 text-emerald-400" style="left: 6%; animation-duration: 13s; animation-delay: 0s;" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 11c-1.5-3-4-3-4.5-1.5-.5 1.5 1.5 3.5 4.5 4.5-3 1.5-3 4-1.5 4.5 1.5.5 3.5-1.5 4.5-4.5 1.5 3 4 3 4.5 1.5.5-1.5-1.5-3.5-4.5-4.5 3-1.5 3-4 1.5-4.5-1.5-.5-3.5 1.5-4.5 4.5zm-1 3.5v5h2v-5"/>
+    </svg>
+    <!-- 小金幣 1 -->
+    <svg class="charm w-8 h-8 text-amber-400" style="left: 22%; animation-duration: 11s; animation-delay: 2.5s;" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="12" r="9" fill="#facc15" stroke="#eab308" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
+      <text x="12" y="15" font-size="8" font-weight="bold" fill="#a16207" text-anchor="middle">$</text>
+    </svg>
+    <!-- 粉嫩毛氈小花 1 -->
+    <svg class="charm w-11 h-11 text-pink-300" style="left: 38%; animation-duration: 15s; animation-delay: 5s;" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="6" r="3.2"/><circle cx="12" cy="18" r="3.2"/><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="12" r="3.2"/>
+      <circle cx="12" cy="12" r="3.2" fill="#fef08a"/>
+    </svg>
+    <!-- 幸運草 2 -->
+    <svg class="charm w-11 h-11 text-emerald-400/85" style="left: 54%; animation-duration: 14s; animation-delay: 1.2s;" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 11c-1.5-3-4-3-4.5-1.5-.5 1.5 1.5 3.5 4.5 4.5-3 1.5-3 4-1.5 4.5 1.5.5 3.5-1.5 4.5-4.5 1.5 3 4 3 4.5 1.5.5-1.5-1.5-3.5-4.5-4.5 3-1.5 3-4 1.5-4.5-1.5-.5-3.5 1.5-4.5 4.5zm-1 3.5v5h2v-5"/>
+    </svg>
+    <!-- 小金幣 2 -->
+    <svg class="charm w-7 h-7 text-amber-400" style="left: 68%; animation-duration: 12s; animation-delay: 7s;" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="12" r="9" fill="#facc15" stroke="#eab308" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
+      <text x="12" y="15" font-size="8" font-weight="bold" fill="#a16207" text-anchor="middle">$</text>
+    </svg>
+    <!-- 藍紫色小花 2 -->
+    <svg class="charm w-9 h-9 text-indigo-300" style="left: 82%; animation-duration: 16s; animation-delay: 3.2s;" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="6" r="3.2"/><circle cx="12" cy="18" r="3.2"/><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="12" r="3.2"/>
+      <circle cx="12" cy="12" r="3.2" fill="#fed7aa"/>
+    </svg>
+    <!-- 粉嫩毛氈小花 2 -->
+    <svg class="charm w-8 h-8 text-rose-300" style="left: 93%; animation-duration: 13.5s; animation-delay: 8.5s;" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="6" r="3.2"/><circle cx="12" cy="18" r="3.2"/><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="12" r="3.2"/>
+      <circle cx="12" cy="12" r="3.2" fill="#fef08a"/>
+    </svg>
+    <!-- 小金幣 3 -->
+    <svg class="charm w-9 h-9 text-amber-400" style="left: 14%; animation-duration: 12.5s; animation-delay: 9s;" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="12" r="9" fill="#facc15" stroke="#eab308" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
+      <text x="12" y="15" font-size="8" font-weight="bold" fill="#a16207" text-anchor="middle">$</text>
+    </svg>
+  </div>
+
+  <!-- 頂部導航列：羊毛氈風格織布條 -->
+  <header class="sticky top-0 z-40 bg-[#fbf6ef]/90 backdrop-blur-md border-b-2 border-dashed border-[#e3d2c5] shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-300 via-purple-300 to-blue-300 p-0.5 shadow-md flex items-center justify-center border-2 border-dashed border-white">
+          <div class="w-full h-full bg-white/70 rounded-xl flex items-center justify-center text-xl">
+            🧶
+          </div>
+        </div>
+        <div>
+          <h1 class="text-xl font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
+            Annie Chen的英文學習坊
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-pink-100 text-pink-700 font-bold border border-pink-200">Annie's Studio</span>
+          </h1>
+          <p class="text-xs text-slate-500 font-medium">溫暖質樸針織布紋 • 浪漫飄落幸運草與金幣</p>
+        </div>
+      </div>
+
+      <!-- 右側：語音口音選擇器與全局停止按鈕 -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <!-- 語音口音切換選單 (依作業系統智慧匹配) -->
+        <div class="flex items-center bg-white/80 backdrop-blur-md border border-purple-200/90 rounded-2xl px-2.5 py-1.5 shadow-xs gap-1.5">
+          <span class="text-xs font-black text-purple-700 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/>
+            </svg>
+            口音
+          </span>
+          <select id="voice-select" onchange="onVoiceChange(this.value)" class="text-xs font-bold text-slate-700 bg-transparent focus:outline-none cursor-pointer pr-1">
+            <option value="auto">系統推薦口音 (偵測中...)</option>
+          </select>
+        </div>
+
+        <!-- 全局停止按鈕 -->
+        <button onclick="stopSpeaking()" class="crystal-btn px-3 py-1.5 text-xs text-rose-600 hover:text-rose-700" title="停止目前播放">
+          <svg class="w-4 h-4 mr-1 text-rose-500" fill="currentColor" viewBox="0 0 24 24">
+            <rect x="6" y="6" width="12" height="12" rx="3"/>
+          </svg>
+          停止朗讀
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-8 space-y-12">
+
+    <!-- ==========================================
+         PART 1: 核心關鍵單字庫
+    =========================================== -->
+    <section>
+      <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-5 sm:p-6 border-2 border-dashed border-[#e6b8c4] shadow-sm mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="felt-badge felt-badge-pink">Part 1</span>
+            <h2 id="part1-heading" class="text-2xl font-black text-slate-800 tracking-tight">核心關鍵單字庫</h2>
+            <!-- Part 1 專屬設定按鈕 -->
+            <button onclick="openModal('part1')" class="crystal-btn px-2.5 py-1 text-xs text-pink-700 border-pink-200/80 shadow-xs" title="設定與編輯 Part 1 單字庫">
+              ⚙️ 設定
+            </button>
+          </div>
+          <p class="text-sm text-slate-500 mt-1.5">包含 IPA 音標、水晶朗讀發音與中文展開，配備專屬調速金屬按鍵與內容自訂功能</p>
+        </div>
+
+        <!-- Part 1 專屬金屬按鈕調速器與批次按鈕 -->
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- 金屬語速控制器 -->
+          <div class="flex items-center bg-slate-100/90 border border-slate-300/80 rounded-2xl px-3 py-1.5 shadow-inner gap-2.5">
+            <span class="text-xs font-bold text-slate-600">語速</span>
+            <button onclick="changeSpeed('part1', -0.1)" class="metal-btn" title="減慢 0.1x" aria-label="減少語速">－</button>
+            <span id="speed-display-part1" class="text-xs font-extrabold text-slate-700 w-12 text-center font-mono bg-white py-0.5 px-1.5 rounded border border-slate-200 shadow-xs">1.0x</span>
+            <button onclick="changeSpeed('part1', 0.1)" class="metal-btn" title="加快 0.1x" aria-label="增加語速">＋</button>
+          </div>
+
+          <!-- 切換全部中文 (水晶按鈕) -->
+          <button onclick="toggleAllVocabTranslation()" class="crystal-btn px-3.5 py-2 text-xs">
+            切換全部中文
+          </button>
+        </div>
+      </div>
+
+      <!-- 單字卡容器 -->
+      <div id="vocab-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <!-- JS 動態生成 -->
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         PART 2: 精選英文句練習
+    =========================================== -->
+    <section>
+      <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-5 sm:p-6 border-2 border-dashed border-[#b3cbef] shadow-sm mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="felt-badge felt-badge-blue">Part 2</span>
+            <h2 id="part2-heading" class="text-2xl font-black text-slate-800 tracking-tight">精選英文句練習</h2>
+            <!-- Part 2 專屬設定按鈕 -->
+            <button onclick="openModal('part2')" class="crystal-btn px-2.5 py-1 text-xs text-blue-700 border-blue-200/80 shadow-xs" title="設定與編輯 Part 2 精選句庫">
+              ⚙️ 設定
+            </button>
+          </div>
+          <p class="text-sm text-slate-500 mt-1.5">掌握自然流暢的句型連音與音標節奏，支援自訂句子庫</p>
+        </div>
+
+        <!-- Part 2 專屬金屬調速按鈕與按鈕 -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center bg-slate-100/90 border border-slate-300/80 rounded-2xl px-3 py-1.5 shadow-inner gap-2.5">
+            <span class="text-xs font-bold text-slate-600">語速</span>
+            <button onclick="changeSpeed('part2', -0.1)" class="metal-btn" title="減慢 0.1x">－</button>
+            <span id="speed-display-part2" class="text-xs font-extrabold text-slate-700 w-12 text-center font-mono bg-white py-0.5 px-1.5 rounded border border-slate-200 shadow-xs">1.0x</span>
+            <button onclick="changeSpeed('part2', 0.1)" class="metal-btn" title="加快 0.1x">＋</button>
+          </div>
+
+          <button onclick="toggleAllSentencesTranslation()" class="crystal-btn px-3.5 py-2 text-xs">
+            切換全部中文
+          </button>
+        </div>
+      </div>
+
+      <!-- 句子卡容器 -->
+      <div id="sentences-container" class="space-y-4">
+        <!-- JS 動態生成 -->
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         PART 3: 精選英文短文研讀
+    =========================================== -->
+    <section>
+      <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-5 sm:p-6 border-2 border-dashed border-[#cca4ec] shadow-sm mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="felt-badge felt-badge-purple">Part 3</span>
+            <h2 class="text-2xl font-black text-slate-800 tracking-tight">精選英文短文研讀</h2>
+            <!-- Part 3 專屬設定按鈕 -->
+            <button onclick="openModal('part3')" class="crystal-btn px-2.5 py-1 text-xs text-purple-700 border-purple-200/80 shadow-xs" title="設定與編輯 Part 3 短文內容">
+              ⚙️ 設定
+            </button>
+          </div>
+          <p class="text-sm text-slate-500 mt-1.5">深入體會語言學習的深層寓意與修辭結構，可自訂短文內容</p>
+        </div>
+
+        <!-- Part 3 專屬金屬調速按鈕 -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center bg-slate-100/90 border border-slate-300/80 rounded-2xl px-3 py-1.5 shadow-inner gap-2.5">
+            <span class="text-xs font-bold text-slate-600">語速</span>
+            <button onclick="changeSpeed('part3', -0.1)" class="metal-btn" title="減慢 0.1x">－</button>
+            <span id="speed-display-part3" class="text-xs font-extrabold text-slate-700 w-12 text-center font-mono bg-white py-0.5 px-1.5 rounded border border-slate-200 shadow-xs">1.0x</span>
+            <button onclick="changeSpeed('part3', 0.1)" class="metal-btn" title="加快 0.1x">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 文章卡片：紫色系羊毛氈 -->
+      <div class="felt-card felt-card-purple p-6 sm:p-8 bg-gradient-to-br from-white via-[#faf7ff] to-[#f5effe]">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b-2 border-dashed border-purple-200">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-2xl bg-purple-100 border border-purple-300 flex items-center justify-center text-lg">
+              📖
+            </div>
+            <div>
+              <h3 id="article-title-display" class="text-xl font-extrabold text-purple-950">The Power of Language Learning</h3>
+              <p class="text-xs text-purple-600 font-medium">探索世界與思維的鑰匙</p>
+            </div>
+          </div>
+
+          <!-- 水晶操作按鈕 -->
+          <div class="flex items-center space-x-2.5">
+            <button id="speaker-article" onclick="playArticle()" class="crystal-btn px-4 py-2 text-sm text-purple-700 hover:text-purple-900">
+              <svg class="w-4 h-4 mr-1.5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              朗讀全文
+            </button>
+
+            <button onclick="toggleArticleTranslation()" class="crystal-btn px-4 py-2 text-sm text-slate-700 hover:text-purple-800">
+              <svg class="w-4 h-4 mr-1.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+              </svg>
+              <span id="article-trans-label">顯示中文翻譯</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 英文短文主體 -->
+        <div class="mt-6">
+          <p id="article-text" class="text-slate-800 text-base sm:text-lg leading-relaxed font-medium bg-white/70 p-5 rounded-2xl border border-purple-100 shadow-inner break-words">
+            Language is not just a tool for communication; it is a gateway to understanding diverse cultures and perspectives. When we learn a new language, we are not merely memorizing words and grammatical rules. Instead, we are training our brains to see the world through a different lens. Every idiom, proverb, and cultural nuance tells a unique story about its people. Thus, embarking on a language-learning journey is one of the most rewarding adventures a person can undertake.
+          </p>
+        </div>
+
+        <!-- 中文翻譯展開區 -->
+        <div id="article-translation" class="mt-4 hidden">
+          <div class="p-5 rounded-2xl bg-[#fffcf5] border-2 border-dashed border-amber-300 text-slate-700 shadow-xs">
+            <div class="flex items-center space-x-2 text-amber-800 font-extrabold text-xs tracking-wider mb-2">
+              <span>🌸 繁體中文全譯：</span>
+            </div>
+            <p id="article-zh-text" class="leading-relaxed text-sm sm:text-base font-normal">
+              語言不僅僅是溝通的工具，更是理解多元文化與不同視角的門戶。當我們學習一門新語言時，我們絕不只是在死記硬背單字和文法規則；相反地，我們是在訓練大腦透過不同的視角去看待世界。每一個成語、諺語和文化細微之處，都訴說著該民族獨一無二的故事。因此，踏上語言學習的旅程，是一個人所能開啟的最值得且最有回報的冒險之一。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 回到最頂端按鈕：羊毛氈水晶質感浮動鍵 -->
+  <button id="scroll-top-btn" onclick="scrollToTop()" class="scroll-top-btn fixed bottom-7 right-7 z-40 p-3.5 rounded-2xl bg-white/80 backdrop-blur-md border-2 border-dashed border-[#e6b8c4] shadow-xl text-pink-700 hover:text-pink-900 hover:bg-white flex items-center justify-center group active:scale-95" title="回到最頂端">
+    <div class="flex flex-col items-center">
+      <svg class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+      <span class="text-[10px] font-black tracking-tight mt-0.5">TOP</span>
+    </div>
+  </button>
+
+  <!-- 全能互動設定視窗 Modal -->
+  <div id="settings-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-[#fbf7f4] rounded-3xl border-3 border-dashed border-pink-300 w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      <!-- Modal 標題列 -->
+      <div class="p-5 border-b-2 border-dashed border-pink-200 bg-white/70 flex items-center justify-between">
+        <div>
+          <h3 id="modal-title" class="text-xl font-black text-slate-800">設定</h3>
+          <p id="modal-subtitle" class="text-xs text-slate-500 font-medium">管理與調整學習內容</p>
+        </div>
+        <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal 表單內容 (滾動區) -->
+      <div id="modal-content" class="p-5 overflow-y-auto flex-1 space-y-4">
+        <!-- 動態渲染表單 -->
+      </div>
+
+      <!-- Modal 底部按鈕區 -->
+      <div class="p-4 border-t-2 border-dashed border-pink-200 bg-white/70 flex flex-wrap items-center justify-between gap-3">
+        <button onclick="resetCurrentPartToDefault()" class="crystal-btn px-4 py-2 text-xs text-rose-600 hover:text-rose-800 border-rose-200">
+          🔄 恢復此區預設值
+        </button>
+        <div class="flex items-center space-x-2.5">
+          <button onclick="closeModal()" class="crystal-btn px-4 py-2 text-xs text-slate-600">
+            取消
+          </button>
+          <button id="modal-save-btn" onclick="saveModalChanges()" class="crystal-btn px-5 py-2 text-xs text-emerald-800 bg-emerald-100/80 hover:bg-emerald-200 font-black border-emerald-300">
+            💾 儲存並更新
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 提示彈窗 -->
+  <div id="toast" class="fixed bottom-6 left-6 bg-slate-900/90 backdrop-blur-md text-white text-sm px-4 py-2.5 rounded-2xl shadow-2xl flex items-center space-x-2 pointer-events-none opacity-0 transition-opacity duration-300 z-50 border border-slate-700">
+    <span class="text-base">✨</span>
+    <span id="toast-text">已更新</span>
+  </div>
+
+  <script>
+    // 預設資料庫備份
+    const DEFAULT_VOCAB_DATA = [
+      { word: "affirmation", ipa: "/ˌæf.ɚˈmeɪ.ʃən/", pos: "n.", zh: "肯定、確認、正面肯定語" },
+      { word: "effortlessly", ipa: "/ˈef.ɚt.ləs.li/", pos: "adv.", zh: "毫不費力地、輕鬆地" },
+      { word: "wealth", ipa: "/welθ/", pos: "n.", zh: "財富、豐富、大量" },
+      { word: "financial", ipa: "/faɪˈnæn.ʃəl/", pos: "adj.", zh: "財務的、金融的" },
+      { word: "unlimited", ipa: "/ʌnˈlɪm.ə.t̬ɪd/", pos: "adj.", zh: "無限的、無條件的" },
+      { word: "greater", ipa: "/ˈɡreɪ.t̬ɚ/", pos: "adj.", zh: "更大的、更優秀的" },
+      { word: "received", ipa: "/rɪˈsiːvd/", pos: "v.", zh: "收到、接納 (過去分詞)" },
+      { word: "deserve", ipa: "/dɪˈzɝːv/", pos: "v.", zh: "應得、值得" },
+      { word: "prosperity", ipa: "/prɑːˈsper.ə.t̬i/", pos: "n.", zh: "繁榮、興旺、富足" },
+      { word: "required", ipa: "/rɪˈkwaɪɚd/", pos: "adj.", zh: "必需的、規定的" }
+    ];
+
+    const DEFAULT_SENTENCE_DATA = [
+      { id: 1, en: "I have more than enough money.", ipa: "/aɪ hæv mɔːr ðæn ɪˈnʌf ˈmʌni/", zh: "我擁有的金錢綽綽有餘。" },
+      { id: 2, en: "You are allowed to take up space in this world.", ipa: "/juː ɑːr əˈlaʊd tuː teɪk ʌp speɪs ɪn ðɪs wɜːrld/", zh: "你有權利在這個世界上擁有屬於自己的立足之地。" },
+      { id: 3, en: "Everything is okay. You are safe.", ipa: "/ˈevriθɪŋ ɪz oʊˈkeɪ. juː ɑːr seɪf/", zh: "一切都很好，你很安全。" },
+      { id: 4, en: "Be gentle with yourself today.", ipa: "/biː ˈdʒentl wɪð jʊərˈself təˈdeɪ/", zh: "今天請溫柔地對待你自己。" },
+      { id: 5, en: "Right now, you don't have to do anything.", ipa: "/raɪt naʊ, juː doʊnt hæv tuː duː ˈeniθɪŋ/", zh: "此時此刻，你不需要做任何事。" }
+    ];
+
+    const DEFAULT_ARTICLE_DATA = {
+      title: "The Power of Language Learning",
+      en: "Language is not just a tool for communication; it is a gateway to understanding diverse cultures and perspectives. When we learn a new language, we are not merely memorizing words and grammatical rules. Instead, we are training our brains to see the world through a different lens. Every idiom, proverb, and cultural nuance tells a unique story about its people. Thus, embarking on a language-learning journey is one of the most rewarding adventures a person can undertake.",
+      zh: "語言不僅僅是溝通的工具，更是理解多元文化與不同視角的門戶。當我們學習一門新語言時，我們絕不只是在死記硬背單字和文法規則；相反地，我們是在訓練大腦透過不同的視角去看待世界。每一個成語、諺語和文化細微之處，都訴說著該民族獨一無二的故事。因此，踏上語言學習的旅程，是一個人所能開啟的最值得且最有回報的冒險之一。"
+    };
+
+    // 取得或初始化本機資料
+    function loadSavedData(key, fallback) {
+      try {
+        const item = localStorage.getItem(`annie_studio_${key}`);
+        return item ? JSON.parse(item) : JSON.parse(JSON.stringify(fallback));
+      } catch (e) {
+        return JSON.parse(JSON.stringify(fallback));
+      }
+    }
+
+    let VOCAB_DATA = loadSavedData('vocab', DEFAULT_VOCAB_DATA);
+    let SENTENCE_DATA = loadSavedData('sentences', DEFAULT_SENTENCE_DATA);
+    let ARTICLE_DATA = loadSavedData('article', DEFAULT_ARTICLE_DATA);
+
+    // 各 Part 獨立語速狀態
+    const partSpeeds = {
+      part1: 1.0,
+      part2: 1.0,
+      part3: 1.0
+    };
+
+    let activeSpeakerId = null;
+    let currentModalPart = null;
+    let availableVoices = [];
+    let selectedVoiceURI = localStorage.getItem('annie_studio_selected_voice') || 'auto';
+
+    // 偵測使用者的作業系統 (OS Detection)
+    function detectUserOS() {
+      const userAgent = window.navigator.userAgent || '';
+      const platform = window.navigator?.userAgentData?.platform || window.navigator.platform || '';
+      
+      if (/Mac|iPod|iPhone|iPad/i.test(platform) || /Macintosh|Mac OS X/i.test(userAgent)) {
+        return 'macOS';
+      }
+      if (/Win/i.test(platform) || /Windows/i.test(userAgent)) {
+        return 'Windows';
+      }
+      if (/Android/i.test(userAgent)) {
+        return 'Android';
+      }
+      if (/Linux/i.test(platform) || /CrOS/i.test(userAgent)) {
+        return 'Linux';
+      }
+      return 'Other';
+    }
+
+    // 初始化與加載瀏覽器與作業系統的語音清單
+    function populateVoiceList() {
+      if (!('speechSynthesis' in window)) return;
+      
+      const allVoices = window.speechSynthesis.getVoices();
+      // 篩選英文語系語音 (en-US, en-GB, en-AU, en-CA, en-IN, en-IE 等)
+      availableVoices = allVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+
+      const voiceSelect = document.getElementById('voice-select');
+      if (!voiceSelect) return;
+
+      if (availableVoices.length === 0) {
+        voiceSelect.innerHTML = `<option value="auto">預設英文語音</option>`;
+        return;
+      }
+
+      const os = detectUserOS();
+      let bestDefaultVoice = null;
+
+      // 根據作業系統優先挑選最佳音質的預設口音
+      if (os === 'macOS') {
+        // macOS / iOS 優選: Samantha, Daniel (UK), Karen (AU), 或 Siri 語音
+        bestDefaultVoice = availableVoices.find(v => v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('Karen') || v.name.includes('Siri'))
+                        || availableVoices.find(v => v.lang === 'en-US');
+      } else if (os === 'Windows') {
+        // Windows 優選: Microsoft Natural Voices, David, Zira, Jenny, Guy
+        bestDefaultVoice = availableVoices.find(v => v.name.includes('Natural') || v.name.includes('Online'))
+                        || availableVoices.find(v => v.name.includes('David') || v.name.includes('Zira') || v.name.includes('Mark'))
+                        || availableVoices.find(v => v.lang === 'en-US');
+      } else if (os === 'Android') {
+        // Android 優選: Google 英語語音
+        bestDefaultVoice = availableVoices.find(v => v.name.toLowerCase().includes('google') && v.lang.startsWith('en'))
+                        || availableVoices.find(v => v.lang === 'en-US');
+      }
+
+      if (!bestDefaultVoice) {
+        bestDefaultVoice = availableVoices.find(v => v.default) || availableVoices[0];
+      }
+
+      // 格式化口音標籤輔助說明
+      function getAccentTag(v) {
+        const lang = (v.lang || '').toLowerCase();
+        if (lang === 'en-us') return '🇺🇸 美式 (US)';
+        if (lang === 'en-gb') return '🇬🇧 英式 (UK)';
+        if (lang === 'en-au') return '🇦🇺 澳式 (AU)';
+        if (lang === 'en-ca') return '🇨🇦 加拿大 (CA)';
+        if (lang === 'en-in') return '🇮🇳 印式 (IN)';
+        if (lang === 'en-ie') return '🇮🇪 愛爾蘭 (IE)';
+        return `🌐 ${v.lang}`;
+      }
+
+      let optionsHTML = '';
+      
+      // 自動最佳模式 (標註作業系統預設)
+      const osLabelMap = {
+        'macOS': 'Apple / iOS 推薦',
+        'Windows': 'Windows 原生推薦',
+        'Android': 'Android 推薦',
+        'Linux': '系統推薦'
+      };
+      const osRecommendationText = osLabelMap[os] || '作業系統預設';
+      optionsHTML += `<option value="auto">✨ ${osRecommendationText} (${bestDefaultVoice.name})</option>`;
+
+      // 產生口音分類群組
+      const sortedVoices = [...availableVoices].sort((a, b) => {
+        // 優先排列 en-US 與 en-GB
+        const langOrder = (l) => l.startsWith('en-US') ? 1 : l.startsWith('en-GB') ? 2 : l.startsWith('en-AU') ? 3 : 4;
+        return langOrder(a.lang) - langOrder(b.lang);
+      });
+
+      sortedVoices.forEach(v => {
+        const isSelected = (selectedVoiceURI === v.voiceURI);
+        const accentTag = getAccentTag(v);
+        // 簡化過長之系統語音名稱
+        const cleanName = v.name.replace(/Microsoft /g, '').replace(/Google /g, 'Google ');
+        optionsHTML += `<option value="${v.voiceURI}" ${isSelected ? 'selected' : ''}>${accentTag} - ${cleanName}</option>`;
+      });
+
+      voiceSelect.innerHTML = optionsHTML;
+
+      // 如果使用者曾選定某語音，恢復選擇
+      if (selectedVoiceURI && selectedVoiceURI !== 'auto') {
+        const exists = availableVoices.some(v => v.voiceURI === selectedVoiceURI);
+        if (exists) {
+          voiceSelect.value = selectedVoiceURI;
+        } else {
+          voiceSelect.value = 'auto';
+        }
+      }
+    }
+
+    // 口音切換事件
+    function onVoiceChange(value) {
+      selectedVoiceURI = value;
+      localStorage.setItem('annie_studio_selected_voice', value);
+      
+      const voiceSelect = document.getElementById('voice-select');
+      const selectedOptionText = voiceSelect.options[voiceSelect.selectedIndex]?.text || '';
+      showToast(`已切換口音：${selectedOptionText}`);
+    }
+
+    // 平滑滾動至最頂端
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // 調整各 Part 語速 (-0.1 或 +0.1)
+    function changeSpeed(partKey, delta) {
+      if (!partSpeeds[partKey]) partSpeeds[partKey] = 1.0;
+      let newSpeed = Math.round((partSpeeds[partKey] + delta) * 10) / 10;
+      if (newSpeed < 0.5) newSpeed = 0.5;
+      if (newSpeed > 2.0) newSpeed = 2.0;
+
+      partSpeeds[partKey] = newSpeed;
+      const displayEl = document.getElementById(`speed-display-${partKey}`);
+      if (displayEl) {
+        displayEl.innerText = `${newSpeed.toFixed(1)}x`;
+      }
+      showToast(`語速已調整為 ${newSpeed.toFixed(1)}x`);
+    }
+
+    // 朗讀文字 (使用選定口音與指定語速)
+    function speakText(text, elementId = null, partKey = 'part1') {
+      if (!('speechSynthesis' in window)) {
+        showToast("您的瀏覽器不支援語音播放功能");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = partSpeeds[partKey] || 1.0;
+      utterance.pitch = 1.0;
+
+      // 決定朗讀語音
+      if (availableVoices.length > 0) {
+        if (selectedVoiceURI && selectedVoiceURI !== 'auto') {
+          const customVoice = availableVoices.find(v => v.voiceURI === selectedVoiceURI);
+          if (customVoice) utterance.voice = customVoice;
+        } else {
+          // auto: 依 OS 與語音名稱匹配最合適口音
+          const os = detectUserOS();
+          let preferredVoice = null;
+          if (os === 'macOS') {
+            preferredVoice = availableVoices.find(v => v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('Karen'))
+                          || availableVoices.find(v => v.lang === 'en-US');
+          } else if (os === 'Windows') {
+            preferredVoice = availableVoices.find(v => v.name.includes('Natural') || v.name.includes('Online'))
+                          || availableVoices.find(v => v.name.includes('David') || v.name.includes('Zira'))
+                          || availableVoices.find(v => v.lang === 'en-US');
+          } else if (os === 'Android') {
+            preferredVoice = availableVoices.find(v => v.name.toLowerCase().includes('google') && v.lang.startsWith('en'))
+                          || availableVoices.find(v => v.lang === 'en-US');
+          }
+          if (preferredVoice) {
+            utterance.voice = preferredVoice;
+          }
+        }
+      }
+
+      clearSpeakingVisuals();
+      if (elementId) {
+        activeSpeakerId = elementId;
+        const targetBtn = document.getElementById(`speaker-${elementId}`);
+        if (targetBtn) {
+          targetBtn.classList.add('playing');
+        }
+      }
+
+      utterance.onend = clearSpeakingVisuals;
+      utterance.onerror = clearSpeakingVisuals;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function clearSpeakingVisuals() {
+      if (activeSpeakerId) {
+        const prevBtn = document.getElementById(`speaker-${activeSpeakerId}`);
+        if (prevBtn) {
+          prevBtn.classList.remove('playing');
+        }
+        activeSpeakerId = null;
+      }
+    }
+
+    function stopSpeaking() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      clearSpeakingVisuals();
+      showToast("已停止朗讀");
+    }
+
+    // 渲染 Part 1：單字卡
+    function renderVocabGrid() {
+      const container = document.getElementById('vocab-grid');
+      const heading = document.getElementById('part1-heading');
+      if (heading) heading.innerText = `核心關鍵單字庫 (${VOCAB_DATA.length} Words)`;
+
+      if (VOCAB_DATA.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-8 text-center bg-white/60 rounded-2xl border-2 border-dashed border-pink-200">
+            <p class="text-sm text-slate-500 font-bold">目前無單字任務，請點擊上方「⚙️ 設定」新增單字！</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = VOCAB_DATA.map((item, index) => {
+        const id = `vocab-${index}`;
+        return `
+          <div class="felt-card p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-2.5">
+                <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
+                  ${item.pos || 'word'}
+                </span>
+                <div class="flex items-center space-x-1.5">
+                  <button id="speaker-${id}" onclick="speakText('${item.word.replace(/'/g, "\\'")}', '${id}', 'part1')" title="朗讀單字" class="crystal-btn w-8 h-8 text-pink-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                    </svg>
+                  </button>
+                  <button onclick="toggleTranslation('${id}-trans')" title="顯示/隱藏中文" class="crystal-btn w-8 h-8 text-slate-700">
+                    <span class="text-xs font-bold">中</span>
+                  </button>
+                </div>
+              </div>
+
+              <h3 class="text-lg font-black text-slate-900 tracking-tight break-words">${item.word}</h3>
+              <p class="text-xs text-rose-700/80 font-ipa mt-1 font-semibold tracking-wide break-words">${item.ipa}</p>
+            </div>
+
+            <div id="${id}-trans" class="vocab-translation-block mt-3 pt-2.5 border-t border-dashed border-pink-200 hidden">
+              <p class="text-xs font-bold text-rose-800 bg-pink-50/70 p-1.5 rounded-xl border border-pink-100">${item.zh}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 渲染 Part 2：句子卡
+    function renderSentences() {
+      const container = document.getElementById('sentences-container');
+      const heading = document.getElementById('part2-heading');
+      if (heading) heading.innerText = `精選英文句練習 (${SENTENCE_DATA.length} Sentences)`;
+
+      if (SENTENCE_DATA.length === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center bg-white/60 rounded-2xl border-2 border-dashed border-blue-200">
+            <p class="text-sm text-slate-500 font-bold">目前無句子任務，請點擊上方「⚙️ 設定」新增句子！</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = SENTENCE_DATA.map((item, index) => {
+        const id = `sentence-${index}`;
+        return `
+          <div class="felt-card felt-card-blue p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-1.5 flex-1">
+              <div class="flex items-center space-x-3">
+                <span class="w-7 h-7 flex items-center justify-center bg-blue-100 text-blue-700 font-extrabold rounded-full text-xs border border-blue-200 shadow-xs">
+                  ${index + 1}
+                </span>
+                <p class="text-base sm:text-lg font-black text-slate-800 tracking-tight">${item.en}</p>
+              </div>
+
+              <p class="text-xs sm:text-sm text-blue-800/80 font-ipa tracking-wide pl-10 font-medium">
+                ${item.ipa}
+              </p>
+
+              <div id="${id}-trans" class="sentence-translation-block pl-10 hidden pt-1">
+                <p class="text-sm font-semibold text-slate-700 bg-blue-50/80 inline-block px-3 py-1.5 rounded-xl border border-blue-200/60">
+                  ${item.zh}
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-2 shrink-0 self-end md:self-center pl-10 md:pl-0">
+              <button id="speaker-${id}" onclick="speakText('${item.en.replace(/'/g, "\\'")}', '${id}', 'part2')" class="crystal-btn px-3.5 py-1.5 text-xs text-blue-700 hover:text-blue-900">
+                <svg class="w-4 h-4 mr-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                </svg>
+                朗讀
+              </button>
+
+              <button onclick="toggleTranslation('${id}-trans')" class="crystal-btn px-3.5 py-1.5 text-xs text-slate-700">
+                <span class="mr-1">文</span> 中譯
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 渲染 Part 3：文章
+    function renderArticle() {
+      const titleEl = document.getElementById('article-title-display');
+      const textEl = document.getElementById('article-text');
+      const zhEl = document.getElementById('article-zh-text');
+
+      if (titleEl) titleEl.innerText = ARTICLE_DATA.title || "The Power of Language Learning";
+      if (textEl) textEl.innerText = ARTICLE_DATA.en || "";
+      if (zhEl) zhEl.innerText = ARTICLE_DATA.zh || "";
+    }
+
+    // 監聽滾動以顯示/隱藏「回到最頂端」按鈕
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('scroll-top-btn');
+      if (window.scrollY > 150) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    // 切換個別翻譯
+    function toggleTranslation(elementId) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        el.classList.toggle('hidden');
+      }
+    }
+
+    // Part 1 一鍵切換所有單字中文
+    let allVocabShown = false;
+    function toggleAllVocabTranslation() {
+      allVocabShown = !allVocabShown;
+      document.querySelectorAll('.vocab-translation-block').forEach(el => {
+        if (allVocabShown) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+      showToast(allVocabShown ? "已展開全部單字中文" : "已隱藏全部單字中文");
+    }
+
+    // Part 2 一鍵切換所有句子中文
+    let allSentencesShown = false;
+    function toggleAllSentencesTranslation() {
+      allSentencesShown = !allSentencesShown;
+      document.querySelectorAll('.sentence-translation-block').forEach(el => {
+        if (allSentencesShown) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+      showToast(allSentencesShown ? "已展開全部句子中文" : "已隱藏全部句子中文");
+    }
+
+    // Part 3 朗讀短文
+    function playArticle() {
+      speakText(ARTICLE_DATA.en, 'article', 'part3');
+    }
+
+    // Part 3 切換短文中文
+    function toggleArticleTranslation() {
+      const el = document.getElementById('article-translation');
+      const label = document.getElementById('article-trans-label');
+      if (el.classList.contains('hidden')) {
+        el.classList.remove('hidden');
+        label.innerText = "隱藏中文翻譯";
+      } else {
+        el.classList.add('hidden');
+        label.innerText = "顯示中文翻譯";
+      }
+    }
+
+    // ==========================================
+    // 設定視窗 Modal 核心邏輯 (支援自由編輯/增刪)
+    // ==========================================
+    let tempVocab = [];
+    let tempSentences = [];
+    let tempArticle = {};
+
+    function openModal(part) {
+      currentModalPart = part;
+      const modal = document.getElementById('settings-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalSubtitle = document.getElementById('modal-subtitle');
+      const modalContent = document.getElementById('modal-content');
+
+      if (part === 'part1') {
+        modalTitle.innerText = "Part 1：核心單字庫編輯與設定";
+        modalSubtitle.innerText = "自由增刪單字，儲存後自動生成 IPA 音標、詞性與繁中釋義";
+        tempVocab = JSON.parse(JSON.stringify(VOCAB_DATA));
+        renderVocabModalForm();
+      } else if (part === 'part2') {
+        modalTitle.innerText = "Part 2：精選英文句編輯與設定";
+        modalSubtitle.innerText = "自由增刪句子，儲存後自動生成完整句子 IPA 音標與中文翻譯";
+        tempSentences = JSON.parse(JSON.stringify(SENTENCE_DATA));
+        renderSentenceModalForm();
+      } else if (part === 'part3') {
+        modalTitle.innerText = "Part 3：短文研讀內容設定";
+        modalSubtitle.innerText = "自由更換文章標題、英文正文與對應中文翻譯";
+        tempArticle = JSON.parse(JSON.stringify(ARTICLE_DATA));
+        renderArticleModalForm();
+      }
+
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('settings-modal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        currentModalPart = null;
+      }, 200);
+    }
+
+    // 渲染 Modal: 單字表單 (僅需編輯單字，自動提示儲存後生成)
+    function renderVocabModalForm() {
+      const modalContent = document.getElementById('modal-content');
+      modalContent.innerHTML = `
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-bold text-pink-700 bg-pink-100 px-2.5 py-1 rounded-full">
+            共 ${tempVocab.length} 個單字任務
+          </span>
+          <button onclick="addVocabItem()" class="crystal-btn px-3 py-1.5 text-xs text-emerald-700 hover:text-emerald-900 border-emerald-300">
+            ＋ 新增單字
+          </button>
+        </div>
+        
+        <div class="p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-2xl border border-pink-200 text-xs text-pink-800 flex items-center gap-2">
+          <span class="text-base">✨</span>
+          <span><b>智慧自動生成：</b>您只需填入英文單字。點擊「儲存並更新」後，系統將自動分析並生成 <b>IPA 音標</b>、<b>詞性</b> 與 <b>中文釋義</b>！</span>
+        </div>
+
+        <div class="space-y-2.5 mt-3">
+          ${tempVocab.map((v, i) => `
+            <div class="p-3 bg-white/90 rounded-2xl border border-pink-200/90 shadow-xs flex items-center gap-3">
+              <span class="w-6 h-6 rounded-full bg-pink-100 text-pink-700 text-xs font-black flex items-center justify-center shrink-0">
+                ${i + 1}
+              </span>
+              <div class="flex-1 min-w-0">
+                <input type="text" placeholder="請輸入英文單字 (例如：resilience)" value="${v.word || ''}" oninput="tempVocab[${i}].word = this.value.trim()" class="w-full px-3 py-2 text-sm font-bold text-slate-800 rounded-xl border border-slate-200 focus:border-pink-400 focus:outline-none bg-slate-50/50" />
+                ${v.ipa && v.zh ? `
+                  <div class="mt-1.5 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                    <span class="px-1.5 py-0.5 rounded bg-pink-50 text-pink-700 font-bold border border-pink-200">${v.pos || 'word'}</span>
+                    <span class="font-ipa text-rose-700 font-semibold">${v.ipa}</span>
+                    <span class="text-slate-600 truncate">• ${v.zh}</span>
+                  </div>
+                ` : `
+                  <p class="text-[11px] text-pink-500/80 mt-1 italic">（待儲存時自動生成音標與釋義）</p>
+                `}
+              </div>
+              <button onclick="removeVocabItem(${i})" class="text-rose-400 hover:text-rose-600 p-2 rounded-xl hover:bg-rose-50 transition-colors shrink-0" title="刪除此單字">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+              </button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function addVocabItem() {
+      tempVocab.push({ word: "", ipa: "", pos: "", zh: "" });
+      renderVocabModalForm();
+    }
+
+    function removeVocabItem(index) {
+      tempVocab.splice(index, 1);
+      renderVocabModalForm();
+    }
+
+    // 渲染 Modal: 句子表單 (僅需編輯句子，自動提示儲存後生成)
+    function renderSentenceModalForm() {
+      const modalContent = document.getElementById('modal-content');
+      modalContent.innerHTML = `
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-full">
+            共 ${tempSentences.length} 個練習句子
+          </span>
+          <button onclick="addSentenceItem()" class="crystal-btn px-3 py-1.5 text-xs text-emerald-700 hover:text-emerald-900 border-emerald-300">
+            ＋ 新增句子
+          </button>
+        </div>
+
+        <div class="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-200 text-xs text-blue-800 flex items-center gap-2">
+          <span class="text-base">✨</span>
+          <span><b>智慧自動生成：</b>您只需輸入英文句子。點擊「儲存並更新」後，系統將自動為您標註 <b>IPA 句型音標</b> 與 <b>道地中文翻譯</b>！</span>
+        </div>
+
+        <div class="space-y-3 mt-3">
+          ${tempSentences.map((s, i) => `
+            <div class="p-3.5 bg-white/90 rounded-2xl border border-blue-200/90 shadow-xs space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-blue-800 bg-blue-100/90 px-2.5 py-0.5 rounded-full">句子 #${i + 1}</span>
+                <button onclick="removeSentenceItem(${i})" class="text-rose-400 hover:text-rose-600 p-1.5 rounded-xl hover:bg-rose-50 transition-colors" title="刪除此句">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                  </svg>
+                </button>
+              </div>
+              <textarea placeholder="請輸入英文句子 (例如：Gratitude turns what we have into enough.)" oninput="tempSentences[${i}].en = this.value" class="w-full px-3 py-2 text-sm font-semibold text-slate-800 rounded-xl border border-slate-200 focus:border-blue-400 focus:outline-none bg-slate-50/50 leading-relaxed" rows="2">${s.en || ''}</textarea>
+              ${s.ipa && s.zh ? `
+                <div class="text-[11px] bg-blue-50/60 p-2.5 rounded-xl border border-blue-100 flex flex-col gap-1 text-slate-600">
+                  <span class="font-ipa text-blue-800 font-semibold tracking-wide">${s.ipa}</span>
+                  <span class="font-medium text-slate-700">${s.zh}</span>
+                </div>
+              ` : `
+                <p class="text-[11px] text-blue-500/80 italic">（待儲存時自動生成音標與中文翻譯）</p>
+              `}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function addSentenceItem() {
+      tempSentences.push({
+        id: tempSentences.length + 1,
+        en: "",
+        ipa: "",
+        zh: ""
+      });
+      renderSentenceModalForm();
+    }
+
+    function removeSentenceItem(index) {
+      tempSentences.splice(index, 1);
+      renderSentenceModalForm();
+    }
+
+    // 渲染 Modal: 文章表單 (自由編輯文章標題、英文內容與繁中全譯)
+    function renderArticleModalForm() {
+      const modalContent = document.getElementById('modal-content');
+      modalContent.innerHTML = `
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">文章英文標題</label>
+            <input type="text" id="edit-article-title" value="${tempArticle.title || ''}" onchange="tempArticle.title = this.value" class="w-full px-3 py-2 text-sm rounded-xl border border-purple-200 focus:outline-purple-400 bg-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">英文文章正文 (點擊朗讀時將播放此內容)</label>
+            <textarea id="edit-article-en" rows="5" onchange="tempArticle.en = this.value" class="w-full px-3 py-2 text-sm rounded-xl border border-purple-200 focus:outline-purple-400 bg-white leading-relaxed">${tempArticle.en || ''}</textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">繁體中文全譯</label>
+            <textarea id="edit-article-zh" rows="4" onchange="tempArticle.zh = this.value" class="w-full px-3 py-2 text-sm rounded-xl border border-purple-200 focus:outline-purple-400 bg-white leading-relaxed">${tempArticle.zh || ''}</textarea>
+          </div>
+        </div>
+      `;
+    }
+
+    // 儲存 Modal 變更 (Part 1 與 Part 2 自動調用 AI 生成音標與釋義)
+    async function saveModalChanges() {
+      const saveBtn = document.getElementById('modal-save-btn');
+      const originalText = saveBtn.innerHTML;
+
+      if (currentModalPart === 'part1') {
+        const cleanWords = tempVocab.filter(v => v.word && v.word.trim() !== "");
+        if (cleanWords.length === 0) {
+          showToast("請至少保留一個有效的英文單字！");
+          return;
+        }
+
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-emerald-800 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          ✨ 自動生成音標與中譯中...
+        `;
+
+        try {
+          const wordsList = cleanWords.map(w => w.word);
+          const prompt = `針對以下英文單字清單，為每個單字提供：標準 IPA 國際音標 (以斜線包覆例如 /welθ/)、常用詞性縮寫 (pos 例如 n., v., adj., adv.)、以及道地合適的繁體中文解釋 (zh，適合台灣學習者)。單字清單：${JSON.stringify(wordsList)}`;
+          const schema = {
+            type: "ARRAY",
+            items: {
+              type: "OBJECT",
+              properties: {
+                word: { type: "STRING" },
+                ipa: { type: "STRING" },
+                pos: { type: "STRING" },
+                zh: { type: "STRING" }
+              },
+              required: ["word", "ipa", "pos", "zh"],
+              propertyOrdering: ["word", "ipa", "pos", "zh"]
+            }
+          };
+
+          const generated = await callGeminiStructured(prompt, schema);
+          if (Array.isArray(generated) && generated.length > 0) {
+            VOCAB_DATA = generated.map(item => ({
+              word: item.word || "word",
+              ipa: item.ipa || "/.../",
+              pos: item.pos || "word",
+              zh: item.zh || "中文釋義"
+            }));
+          } else {
+            VOCAB_DATA = cleanWords.map(w => ({
+              word: w.word,
+              ipa: w.ipa || "/.../",
+              pos: w.pos || "word",
+              zh: w.zh || "點擊自訂翻譯"
+            }));
+          }
+          localStorage.setItem('annie_studio_vocab', JSON.stringify(VOCAB_DATA));
+          renderVocabGrid();
+          showToast("✨ 單字音標、詞性與繁中釋義已自動生成完成！");
+          closeModal();
+        } catch (error) {
+          console.error("Part 1 Generation Error:", error);
+          // 網路或生成備援：保留單字
+          VOCAB_DATA = cleanWords.map(w => ({
+            word: w.word,
+            ipa: w.ipa || "/.../",
+            pos: w.pos || "word",
+            zh: w.zh || "釋義待生成"
+          }));
+          localStorage.setItem('annie_studio_vocab', JSON.stringify(VOCAB_DATA));
+          renderVocabGrid();
+          showToast("已儲存單字！(連線稍慢，保留基本欄位)");
+          closeModal();
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.innerHTML = originalText;
+        }
+
+      } else if (currentModalPart === 'part2') {
+        const cleanSentences = tempSentences.filter(s => s.en && s.en.trim() !== "");
+        if (cleanSentences.length === 0) {
+          showToast("請至少保留一個有效的英文句子！");
+          return;
+        }
+
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-emerald-800 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          ✨ 自動生成句子音標與翻譯中...
+        `;
+
+        try {
+          const sentenceList = cleanSentences.map(s => s.en);
+          const prompt = `針對以下英文句子清單，為每個句子提供：自然流暢的整句標準 IPA 音標 (以斜線包覆例如 /aɪ hæv mɔːr ðæn ɪˈnʌf ˈmʌni/)、以及通順優美的繁體中文全句翻譯 (zh，符合台灣正體中文語境)。句子清單：${JSON.stringify(sentenceList)}`;
+          const schema = {
+            type: "ARRAY",
+            items: {
+              type: "OBJECT",
+              properties: {
+                en: { type: "STRING" },
+                ipa: { type: "STRING" },
+                zh: { type: "STRING" }
+              },
+              required: ["en", "ipa", "zh"],
+              propertyOrdering: ["en", "ipa", "zh"]
+            }
+          };
+
+          const generated = await callGeminiStructured(prompt, schema);
+          if (Array.isArray(generated) && generated.length > 0) {
+            SENTENCE_DATA = generated.map((item, idx) => ({
+              id: idx + 1,
+              en: item.en || cleanSentences[idx]?.en,
+              ipa: item.ipa || "/.../",
+              zh: item.zh || "中文翻譯"
+            }));
+          } else {
+            SENTENCE_DATA = cleanSentences.map((s, idx) => ({
+              id: idx + 1,
+              en: s.en,
+              ipa: s.ipa || "/.../",
+              zh: s.zh || "中文翻譯"
+            }));
+          }
+          localStorage.setItem('annie_studio_sentences', JSON.stringify(SENTENCE_DATA));
+          renderSentences();
+          showToast("✨ 句子音標與中文翻譯已自動生成完成！");
+          closeModal();
+        } catch (error) {
+          console.error("Part 2 Generation Error:", error);
+          SENTENCE_DATA = cleanSentences.map((s, idx) => ({
+            id: idx + 1,
+            en: s.en,
+            ipa: s.ipa || "/.../",
+            zh: s.zh || "中譯待生成"
+          }));
+          localStorage.setItem('annie_studio_sentences', JSON.stringify(SENTENCE_DATA));
+          renderSentences();
+          showToast("已儲存句子！(連線稍慢，保留基本欄位)");
+          closeModal();
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.innerHTML = originalText;
+        }
+
+      } else if (currentModalPart === 'part3') {
+        const titleInput = document.getElementById('edit-article-title');
+        const enInput = document.getElementById('edit-article-en');
+        const zhInput = document.getElementById('edit-article-zh');
+        if (titleInput) tempArticle.title = titleInput.value;
+        if (enInput) tempArticle.en = enInput.value;
+        if (zhInput) tempArticle.zh = zhInput.value;
+
+        ARTICLE_DATA = JSON.parse(JSON.stringify(tempArticle));
+        localStorage.setItem('annie_studio_article', JSON.stringify(ARTICLE_DATA));
+        renderArticle();
+        showToast("Part 3 短文內容已更新完成！");
+        closeModal();
+      }
+    }
+
+    // 恢復當前 Part 的預設值
+    function resetCurrentPartToDefault() {
+      if (currentModalPart === 'part1') {
+        tempVocab = JSON.parse(JSON.stringify(DEFAULT_VOCAB_DATA));
+        renderVocabModalForm();
+        showToast("已重設為預設 10 個單字");
+      } else if (currentModalPart === 'part2') {
+        tempSentences = JSON.parse(JSON.stringify(DEFAULT_SENTENCE_DATA));
+        renderSentenceModalForm();
+        showToast("已重設為預設 5 個精選句");
+      } else if (currentModalPart === 'part3') {
+        tempArticle = JSON.parse(JSON.stringify(DEFAULT_ARTICLE_DATA));
+        renderArticleModalForm();
+        showToast("已重設為預設短文內容");
+      }
+    }
+
+    // Toast 提示框
+    let toastTimer;
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.innerText = text;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2000);
+    }
+
+    // 初始化渲染
+    window.addEventListener('DOMContentLoaded', () => {
+      renderVocabGrid();
+      renderSentences();
+      renderArticle();
+
+      if ('speechSynthesis' in window) {
+        populateVoiceList();
+        window.speechSynthesis.onvoiceschanged = () => {
+          populateVoiceList();
+        };
+      }
+    });
+  </script>
+</body>
+</html>
