@@ -305,13 +305,19 @@
 
       <!-- 右側：語音口音選擇器與全局停止按鈕 -->
       <div class="flex flex-wrap items-center gap-2.5">
+        <!-- Gemini 真人發音 API 金鑰設定按鈕 -->
+        <button onclick="openApiKeyModal()" id="api-key-badge-btn" class="crystal-btn px-3 py-1.5 text-xs text-purple-700 hover:text-purple-900 border-purple-200/90 shadow-xs flex items-center gap-1.5" title="設定 Gemini API Key 啟用真人發音">
+          <span id="api-status-dot" class="w-2 h-2 rounded-full bg-slate-400"></span>
+          <span id="api-status-text" class="font-bold">🔑 真人發音設定</span>
+        </button>
+
         <!-- 語音口音切換選單 (依作業系統智慧匹配) -->
         <div class="flex items-center bg-white/80 backdrop-blur-md border border-purple-200/90 rounded-2xl px-2.5 py-1.5 shadow-xs gap-1.5">
           <span class="text-xs font-black text-purple-700 flex items-center gap-1">
             <svg class="w-3.5 h-3.5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/>
             </svg>
-            口音
+            口音/音色
           </span>
           <select id="voice-select" onchange="onVoiceChange(this.value)" class="text-xs font-bold text-slate-700 bg-transparent focus:outline-none cursor-pointer pr-1">
             <option value="auto">系統推薦口音 (偵測中...)</option>
@@ -453,13 +459,21 @@
           </div>
 
           <!-- 水晶操作按鈕 -->
-          <div class="flex items-center space-x-2.5">
-            <button id="speaker-article" onclick="playArticle()" class="crystal-btn px-4 py-2 text-sm text-purple-700 hover:text-purple-900">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button id="speaker-article" onclick="playArticle()" class="crystal-btn px-4 py-2 text-sm text-purple-700 hover:text-purple-900" title="開始朗讀全文">
               <svg class="w-4 h-4 mr-1.5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
               朗讀全文
+            </button>
+
+            <!-- 專屬停止朗讀按鈕 -->
+            <button onclick="stopSpeaking()" class="crystal-btn px-4 py-2 text-sm text-rose-600 hover:text-rose-800 border-rose-200/80" title="停止短文朗讀">
+              <svg class="w-4 h-4 mr-1.5 text-rose-500" fill="currentColor" viewBox="0 0 24 24">
+                <rect x="6" y="6" width="12" height="12" rx="2.5"/>
+              </svg>
+              停止朗讀
             </button>
 
             <button onclick="toggleArticleTranslation()" class="crystal-btn px-4 py-2 text-sm text-slate-700 hover:text-purple-800">
@@ -503,6 +517,77 @@
       <span class="text-[10px] font-black tracking-tight mt-0.5">TOP</span>
     </div>
   </button>
+
+  <!-- API 金鑰輸入視窗 Modal -->
+  <div id="apikey-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-[#fbf7f4] rounded-3xl border-3 border-dashed border-purple-300 w-full max-w-lg flex flex-col shadow-2xl overflow-hidden">
+      <div class="p-5 border-b-2 border-dashed border-purple-200 bg-white/70 flex items-center justify-between">
+        <div>
+          <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
+            🎙️ 啟動 Gemini AI 真人發音
+          </h3>
+          <p class="text-xs text-slate-500 font-medium mt-0.5">貼上 Gemini API Key 即可享受自然的真人擬真發音與多種音色</p>
+        </div>
+        <button onclick="closeApiKeyModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">
+          ✕
+        </button>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <div class="p-3 bg-purple-50/80 rounded-2xl border border-purple-200 text-xs text-purple-900 leading-relaxed">
+          💡 <b>如何運作？</b><br/>
+          填入您的 Google Gemini API Key 後，系統將切換為 <b>Gemini 2.5 Flash TTS 真人發音引擎</b>，發音自然生動、重音與語調更地道。未填寫時會自動使用您裝置原生的語音合成發音。
+        </div>
+
+        <!-- 免費獲取 API Key 快捷傳送門 -->
+        <div class="p-4 bg-gradient-to-r from-amber-50 to-purple-50 rounded-2xl border-2 border-dashed border-purple-300 flex flex-col gap-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-extrabold text-purple-900 flex items-center gap-1.5">
+              🎁 <span>還沒有 API 金鑰？Google 官方免費提供：</span>
+            </span>
+          </div>
+          
+          <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="crystal-btn w-full py-2.5 px-4 text-xs font-black text-purple-900 bg-purple-100/90 hover:bg-purple-200 border-purple-300 flex items-center justify-center gap-2 shadow-sm transition-all hover:scale-[1.01]">
+            <span>🚀 點此開啟「Google AI Studio」免費獲取 API Key</span>
+            <svg class="w-4 h-4 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
+
+          <div class="text-[11px] text-slate-600 bg-white/80 p-2.5 rounded-xl border border-purple-100/80 leading-relaxed">
+            <p class="font-bold text-purple-800 mb-1">📌 快速領取 3 步驟：</p>
+            <ol class="list-decimal list-inside space-y-0.5 text-slate-600">
+              <li>點擊上方按鈕，登入您的 Google 帳號。</li>
+              <li>點擊頁面中的 <b class="text-purple-700">「Create API key」</b> 按鈕建立金鑰。</li>
+              <li>複製產生的金鑰（以 <code class="font-mono bg-purple-50 px-1 rounded text-purple-700">AIzaSy...</code> 開頭），貼在下方輸入框即可！</li>
+            </ol>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">貼上 Gemini API Key</label>
+          <input type="password" id="user-gemini-api-key" placeholder="AIzaSy..." class="w-full px-3.5 py-2.5 text-sm font-mono rounded-xl border border-slate-300 focus:border-purple-400 focus:outline-none bg-white shadow-inner" />
+          <p class="text-[11px] text-slate-400 mt-1">※ 金鑰僅保存在您的瀏覽器中，不會上傳至第三方伺服器。</p>
+        </div>
+
+        <div id="api-key-test-status" class="hidden text-xs px-3 py-2 rounded-xl"></div>
+      </div>
+
+      <div class="p-4 border-t-2 border-dashed border-purple-200 bg-white/70 flex items-center justify-between gap-3">
+        <button onclick="clearUserApiKey()" class="crystal-btn px-4 py-2 text-xs text-rose-600 hover:text-rose-800 border-rose-200">
+          清除金鑰 (改回系統語音)
+        </button>
+        <div class="flex items-center space-x-2">
+          <button onclick="closeApiKeyModal()" class="crystal-btn px-4 py-2 text-xs text-slate-600">
+            關閉
+          </button>
+          <button onclick="saveUserApiKey()" class="crystal-btn px-5 py-2 text-xs text-purple-900 bg-purple-100/90 hover:bg-purple-200 font-black border-purple-300">
+            💾 儲存並啟用真人發音
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- 全能互動設定視窗 Modal -->
   <div id="settings-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200">
@@ -600,6 +685,188 @@
     let currentModalPart = null;
     let availableVoices = [];
     let selectedVoiceURI = localStorage.getItem('annie_studio_selected_voice') || 'auto';
+    let userApiKey = localStorage.getItem('annie_studio_gemini_key') || '';
+    let currentAudioSource = null;
+
+    // Gemini 真人發音音色清單 (支援自然口吻與多元音質)
+    const GEMINI_TTS_VOICES = [
+      { id: 'Puck', label: '🎙️ Puck (活潑明朗 • Upbeat)' },
+      { id: 'Charon', label: '🎙️ Charon (沉穩專業 • Informative)' },
+      { id: 'Kore', label: '🎙️ Kore (堅定自信 • Firm)' },
+      { id: 'Fenrir', label: '🎙️ Fenrir (熱情高亢 • Excitable)' },
+      { id: 'Zephyr', label: '🎙️ Zephyr (明亮輕快 • Bright)' },
+      { id: 'Aoede', label: '🎙️ Aoede (柔和自然 • Breezy)' }
+    ];
+
+    // 更新 Header 的 API 狀態徽章
+    function updateApiStatusBadge() {
+      const dot = document.getElementById('api-status-dot');
+      const text = document.getElementById('api-status-text');
+      if (!dot || !text) return;
+
+      if (userApiKey && userApiKey.trim() !== '') {
+        dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+        text.innerText = '✨ 真人發音 (已啟用)';
+        text.className = 'font-bold text-emerald-700';
+      } else {
+        dot.className = 'w-2 h-2 rounded-full bg-amber-400';
+        text.innerText = '🔑 貼上API啟動真人發音';
+        text.className = 'font-bold text-amber-700';
+      }
+    }
+
+    function openApiKeyModal() {
+      const modal = document.getElementById('apikey-modal');
+      const keyInput = document.getElementById('user-gemini-api-key');
+      const testStatus = document.getElementById('api-key-test-status');
+      if (keyInput) keyInput.value = userApiKey || '';
+      if (testStatus) testStatus.className = 'hidden';
+
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+    }
+
+    function closeApiKeyModal() {
+      const modal = document.getElementById('apikey-modal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    function saveUserApiKey() {
+      const keyInput = document.getElementById('user-gemini-api-key');
+      const val = keyInput ? keyInput.value.trim() : '';
+
+      if (!val) {
+        showToast("請輸入有效 API Key 或點擊清除金鑰");
+        return;
+      }
+
+      userApiKey = val;
+      localStorage.setItem('annie_studio_gemini_key', userApiKey);
+      updateApiStatusBadge();
+      populateVoiceList();
+      showToast("✨ 已成功設定！已切換為 Gemini 真人發音");
+      closeApiKeyModal();
+    }
+
+    function clearUserApiKey() {
+      userApiKey = '';
+      localStorage.removeItem('annie_studio_gemini_key');
+      const keyInput = document.getElementById('user-gemini-api-key');
+      if (keyInput) keyInput.value = '';
+      updateApiStatusBadge();
+      populateVoiceList();
+      showToast("已清除 API Key，改為使用系統原生語音");
+      closeApiKeyModal();
+    }
+
+    // 輔助函式：將 Base64 轉換為 ArrayBuffer
+    function base64ToArrayBuffer(base64) {
+      const binaryString = atob(base64);
+      const len = binaryString.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      return bytes.buffer;
+    }
+
+    // 輔助函式：將 PCM16 封裝為標準 WAV Blob
+    function pcmToWav(pcm16, sampleRate) {
+      const buffer = new ArrayBuffer(44 + pcm16.length * 2);
+      const view = new DataView(buffer);
+
+      // RIFF identifier
+      writeString(view, 0, 'RIFF');
+      // file length minus 8
+      view.setUint32(4, 36 + pcm16.length * 2, true);
+      // RIFF type
+      writeString(view, 8, 'WAVE');
+      // format chunk identifier
+      writeString(view, 12, 'fmt ');
+      // format chunk length
+      view.setUint32(16, 16, true);
+      // sample format (1 = PCM)
+      view.setUint16(20, 1, true);
+      // channel count (1 = mono)
+      view.setUint16(22, 1, true);
+      // sample rate
+      view.setUint32(24, sampleRate, true);
+      // byte rate (sampleRate * blockAlign)
+      view.setUint32(28, sampleRate * 2, true);
+      // block align (channelCount * bytesPerSample)
+      view.setUint16(32, 2, true);
+      // bits per sample
+      view.setUint16(34, 16, true);
+      // data chunk identifier
+      writeString(view, 36, 'data');
+      // data chunk length
+      view.setUint32(40, pcm16.length * 2, true);
+
+      // 寫入 PCM 數據
+      let offset = 44;
+      for (let i = 0; i < pcm16.length; i++, offset += 2) {
+        view.setInt16(offset, pcm16[i], true);
+      }
+
+      return new Blob([buffer], { type: 'audio/wav' });
+    }
+
+    function writeString(view, offset, string) {
+      for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+      }
+    }
+
+    // 呼叫 Gemini 2.5 Flash TTS 進行高逼真真人語音朗讀
+    async function speakWithGeminiTTS(text, voiceName, speed = 1.0) {
+      const speedInstruction = speed < 0.9 ? "Speak slowly and clearly: " : (speed > 1.2 ? "Speak with energetic fast pace: " : "");
+      const promptText = `${speedInstruction}${text}`;
+
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${encodeURIComponent(userApiKey)}`;
+      const payload = {
+        contents: [{
+          parts: [{ text: promptText }]
+        }],
+        generationConfig: {
+          responseModalities: ["AUDIO"],
+          speechConfig: {
+            voiceConfig: {
+              prebuiltVoiceConfig: { voiceName: voiceName || "Puck" }
+            }
+          }
+        }
+      };
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errJson = await response.json().catch(() => ({}));
+        throw new Error(errJson.error?.message || `HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+      const part = result?.candidates?.[0]?.content?.parts?.[0];
+      const audioBase64 = part?.inlineData?.data;
+      const mimeType = part?.inlineData?.mimeType;
+
+      if (!audioBase64 || !mimeType) {
+        throw new Error("未能取得音訊資料");
+      }
+
+      const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+      const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 24000;
+      const pcmData = base64ToArrayBuffer(audioBase64);
+      const pcm16 = new Int16Array(pcmData);
+      const wavBlob = pcmToWav(pcm16, sampleRate);
+      const audioUrl = URL.createObjectURL(wavBlob);
+
+      return audioUrl;
+    }
 
     // 偵測使用者的作業系統 (OS Detection)
     function detectUserOS() {
@@ -674,6 +941,17 @@
 
       let optionsHTML = '';
       
+      // 若已設定 Gemini API Key，加入真人發音專屬音色清單
+      if (userApiKey && userApiKey.trim() !== '') {
+        optionsHTML += `<optgroup label="🌟 Gemini AI 真人擬真發音音色">`;
+        GEMINI_TTS_VOICES.forEach(v => {
+          const isSelected = (selectedVoiceURI === `gemini:${v.id}`);
+          optionsHTML += `<option value="gemini:${v.id}" ${isSelected ? 'selected' : ''}>${v.label}</option>`;
+        });
+        optionsHTML += `</optgroup>`;
+        optionsHTML += `<optgroup label="💻 裝置原生離線語音">`;
+      }
+
       // 自動最佳模式 (標註作業系統預設)
       const osLabelMap = {
         'macOS': 'Apple / iOS 推薦',
@@ -699,56 +977,80 @@
         optionsHTML += `<option value="${v.voiceURI}" ${isSelected ? 'selected' : ''}>${accentTag} - ${cleanName}</option>`;
       });
 
+      if (userApiKey && userApiKey.trim() !== '') {
+        optionsHTML += `</optgroup>`;
+      }
+
       voiceSelect.innerHTML = optionsHTML;
 
       // 如果使用者曾選定某語音，恢復選擇
-      if (selectedVoiceURI && selectedVoiceURI !== 'auto') {
-        const exists = availableVoices.some(v => v.voiceURI === selectedVoiceURI);
-        if (exists) {
-          voiceSelect.value = selectedVoiceURI;
-        } else {
+      if (selectedVoiceURI) {
+        if (selectedVoiceURI.startsWith('gemini:') && (!userApiKey || userApiKey.trim() === '')) {
           voiceSelect.value = 'auto';
+        } else {
+          voiceSelect.value = selectedVoiceURI;
         }
       }
     }
 
     // 口音切換事件
-    function onVoiceChange(value) {
-      selectedVoiceURI = value;
-      localStorage.setItem('annie_studio_selected_voice', value);
-      
-      const voiceSelect = document.getElementById('voice-select');
-      const selectedOptionText = voiceSelect.options[voiceSelect.selectedIndex]?.text || '';
-      showToast(`已切換口音：${selectedOptionText}`);
-    }
+    // 朗讀文字 (智慧分流：已填 API Key 則優先使用 Gemini 真人發音，未填則使用系統 Web Speech)
+    async function speakText(text, elementId = null, partKey = 'part1') {
+      stopSpeaking();
 
-    // 平滑滾動至最頂端
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
+      const speed = partSpeeds[partKey] || 1.0;
 
-    // 調整各 Part 語速 (-0.1 或 +0.1)
-    function changeSpeed(partKey, delta) {
-      if (!partSpeeds[partKey]) partSpeeds[partKey] = 1.0;
-      let newSpeed = Math.round((partSpeeds[partKey] + delta) * 10) / 10;
-      if (newSpeed < 0.5) newSpeed = 0.5;
-      if (newSpeed > 2.0) newSpeed = 2.0;
-
-      partSpeeds[partKey] = newSpeed;
-      const displayEl = document.getElementById(`speed-display-${partKey}`);
-      if (displayEl) {
-        displayEl.innerText = `${newSpeed.toFixed(1)}x`;
+      // 標註視覺播放中
+      clearSpeakingVisuals();
+      if (elementId) {
+        activeSpeakerId = elementId;
+        const targetBtn = document.getElementById(`speaker-${elementId}`);
+        if (targetBtn) targetBtn.classList.add('playing');
       }
-      showToast(`語速已調整為 ${newSpeed.toFixed(1)}x`);
+
+      // 判斷是否使用 Gemini 真人發音
+      if (userApiKey && userApiKey.trim() !== '') {
+        try {
+          let chosenVoiceName = "Puck";
+          if (selectedVoiceURI && selectedVoiceURI.startsWith('gemini:')) {
+            chosenVoiceName = selectedVoiceURI.replace('gemini:', '');
+          }
+
+          const audioUrl = await speakWithGeminiTTS(text, chosenVoiceName, speed);
+          const audio = new Audio(audioUrl);
+          currentAudioSource = audio;
+
+          audio.onended = () => {
+            clearSpeakingVisuals();
+            currentAudioSource = null;
+            URL.revokeObjectURL(audioUrl);
+          };
+
+          audio.onerror = () => {
+            clearSpeakingVisuals();
+            currentAudioSource = null;
+            URL.revokeObjectURL(audioUrl);
+            fallbackToWebSpeech(text, speed);
+          };
+
+          await audio.play();
+          return;
+        } catch (error) {
+          console.warn("Gemini TTS 失敗，自動切換至系統語音發音:", error);
+          showToast("Gemini 語音連線異常，已切換至系統語音");
+          fallbackToWebSpeech(text, speed);
+          return;
+        }
+      }
+
+      // 預設/未填寫金鑰：使用裝置原生 Web Speech Synthesis
+      fallbackToWebSpeech(text, speed);
     }
 
-    // 朗讀文字 (使用選定口音與指定語速)
-    function speakText(text, elementId = null, partKey = 'part1') {
+    function fallbackToWebSpeech(text, speed = 1.0) {
       if (!('speechSynthesis' in window)) {
         showToast("您的瀏覽器不支援語音播放功能");
+        clearSpeakingVisuals();
         return;
       }
 
@@ -756,12 +1058,12 @@
 
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-US';
-      utterance.rate = partSpeeds[partKey] || 1.0;
+      utterance.rate = speed;
       utterance.pitch = 1.0;
 
       // 決定朗讀語音
       if (availableVoices.length > 0) {
-        if (selectedVoiceURI && selectedVoiceURI !== 'auto') {
+        if (selectedVoiceURI && selectedVoiceURI !== 'auto' && !selectedVoiceURI.startsWith('gemini:')) {
           const customVoice = availableVoices.find(v => v.voiceURI === selectedVoiceURI);
           if (customVoice) utterance.voice = customVoice;
         } else {
@@ -785,15 +1087,6 @@
         }
       }
 
-      clearSpeakingVisuals();
-      if (elementId) {
-        activeSpeakerId = elementId;
-        const targetBtn = document.getElementById(`speaker-${elementId}`);
-        if (targetBtn) {
-          targetBtn.classList.add('playing');
-        }
-      }
-
       utterance.onend = clearSpeakingVisuals;
       utterance.onerror = clearSpeakingVisuals;
 
@@ -811,11 +1104,17 @@
     }
 
     function stopSpeaking() {
+      if (currentAudioSource) {
+        try {
+          currentAudioSource.pause();
+          currentAudioSource.currentTime = 0;
+        } catch (e) {}
+        currentAudioSource = null;
+      }
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
       }
       clearSpeakingVisuals();
-      showToast("已停止朗讀");
     }
 
     // 渲染 Part 1：單字卡
@@ -1374,6 +1673,7 @@
       renderVocabGrid();
       renderSentences();
       renderArticle();
+      updateApiStatusBadge();
 
       if ('speechSynthesis' in window) {
         populateVoiceList();
